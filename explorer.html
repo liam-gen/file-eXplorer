@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>File eXplorer</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="assets/css/explorer.css">
+    <script src="assets/js/menu/dist/context-menu.js"></script>
+</head>
+<body>
+    <div class="header">
+        <button id="back"><</button>
+        <form>
+            <input name="path" id="path" oncopy="copyPath()">
+        </form>
+        <button id="forward">></button>
+    </div>
+
+    <div class="main" id="main"></div>
+
+    <script src="assets/js/explorer.js"></script>
+
+    <script>
+        const fs = require("fs")
+
+        const path = require("path")
+        const cwdOSRoot = path.parse(process.cwd()).root;
+        const fileOSRoot = path.parse(__dirname).root;
+        window.os = fileOSRoot.replace("\\", "/")+"/"
+
+        const url = new URL(window.location.href)
+        basename = url.searchParams.get("path") ? url.searchParams.get("path") : fileOSRoot
+        document.getElementById("path").value = basename
+        files = fs.readdirSync(basename)
+        if(files.length == 0){
+            text = document.createElement("p")
+            text.className = "align-text"
+            text.innerText = "Le dossier est vide :/"
+            document.getElementById("main").appendChild(text)
+        }
+        else{
+            files.forEach(file => {
+            try{
+                infos = fs.lstatSync(basename+"/"+file)
+                element = createElement(basename, file, infos)
+                document.getElementById("main").appendChild(element)
+            }catch(e){}
+        });
+
+
+        elements = document.getElementById("main").children
+        for (let element of elements){
+            if(element.id.startsWith("folder")){
+                var items = [
+    { name: 'Cut', fn: function(target) { console.log('Cut', target); }},
+    { name: 'Copy', fn: function(target) { console.log('Copy', target); }},
+    { name: 'Paste', fn: function(target) { console.log('Paste', target); }},
+    {},
+    { name: 'Select All', fn: function(target) { console.log('Select All', target); }},
+];
+
+var myMenu = new ContextMenu('#'+element.id, items,{
+    className: 'custom-theme',
+    minimalStyling: true
+});
+            }
+        }
+        }
+        
+    </script>
+</body>
+</html>
