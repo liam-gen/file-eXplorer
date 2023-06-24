@@ -1,0 +1,49 @@
+{
+  "name": "@mturco/context-menu",
+  "version": "2.0.0",
+  "description": "A small JavaScript library for adding context menus to any HTML element",
+  "main": "dist/context-menu.js",
+  "moduleName": "ContextMenu",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "demo": "live-server --watch=index.html,context-menu.js",
+    "version": "standard-version --no-verify",
+    "eslint": "eslint .",
+    "stylelint": "stylelint '**/*.{css,less}'",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mturco/context-menu.git"
+  },
+  "keywords": [],
+  "author": "Matt Turco <matt.turco@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "husky": "^6.0.0",
+    "less": "^4.1.1",
+    "live-server": "^1.2.1",
+    "postcss": "^8.2.15",
+    "prettier": "^2.3.0",
+    "pretty-quick": "^3.1.0",
+    "rollup": "^2.48.0",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-uglify": "^6.0.2",
+    "standard-version": "^9.3.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-suitcss": "^15.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
